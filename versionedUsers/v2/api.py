@@ -14,6 +14,9 @@ class UserViewSet(
     ListModelMixin,
     viewsets.GenericViewSet
 ):
+    """
+    ViewSet para obtener y crear usuarios.
+    """
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
@@ -30,6 +33,9 @@ class UserViewSetOne(
     RetrieveModelMixin,
     viewsets.GenericViewSet
 ):
+    """
+    ViewSet para obtener y actualizar usuarios.
+    """
     serializer_class = UserSerializer
     queryset = User.objects.all()
     lookup_field = 'username'
@@ -43,6 +49,10 @@ class UserViewSetOne(
         return super().update(request, *args, **kwargs)
 
 class SignUpView(generics.GenericAPIView):
+
+    """
+    ViewSet para crear usuarios.
+    """
     serializer_class = SignUpSerializer
 
     throttle_scope = 'otro'
@@ -59,6 +69,10 @@ class SignUpView(generics.GenericAPIView):
         return Response(ser.errors, status=400)
 
 class LoginView(APIView):
+
+    """
+    ViewSet para iniciar sesión.
+    """
 
     throttle_scope = 'otro'
 

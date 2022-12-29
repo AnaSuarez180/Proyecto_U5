@@ -6,6 +6,9 @@ from pagos.pagination import StandardResultsSetPagination
 from rest_framework import viewsets, filters 
 
 class PagoViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet para ver pagos.
+    """
     queryset = Payments.objects.get_queryset().order_by('id')
     serializer_class = PaymentSerializer
     pagination_class = StandardResultsSetPagination
@@ -16,6 +19,9 @@ class PagoViewSet(viewsets.ModelViewSet):
     throttle_scope = 'pagos'
 
 class ServicesViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet para ver servicios.
+    """
     queryset = Services.objects.get_queryset().order_by('id')
     serializer_class = ServiceSerializer
     pagination_class = StandardResultsSetPagination
@@ -25,6 +31,9 @@ class ServicesViewSet(viewsets.ModelViewSet):
     throttle_scope = 'pagos'
 
 class PaymentUserViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet para ver a los Payment Users.
+    """
     queryset = PaymentUser.objects.get_queryset().order_by('id')
     serializer_class = PaymentUserSerializer
     pagination_class = StandardResultsSetPagination
@@ -35,6 +44,9 @@ class PaymentUserViewSet(viewsets.ModelViewSet):
     throttle_scope = 'pagos'
 
 class ExpiredPaymentsViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet para ver los pagos expirados.
+    """
     queryset = ExpiredPayments.objects.get_queryset().order_by('id')
     serializer_class = ExpiredPaymentsSerializer
     pagination_class = StandardResultsSetPagination

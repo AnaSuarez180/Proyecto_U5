@@ -35,8 +35,6 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'pagos.apps.PagosConfig',
-    # 'versionedPagos.apps.VersionedpagosConfig',
-    # 'versionedUsers.models.VersionedusersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -47,10 +45,13 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
     'guardian',
+    'corsheaders',
+    'drf_spectacular',
 
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -143,9 +144,11 @@ REST_FRAMEWORK = {
     'DEFAULT_THROTTLE_RATES': {
         'pagos': '1000/day',
         'otro': '2000/day',
-
-    }
+    },
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 CACHES = {
     'default': {
@@ -154,3 +157,11 @@ CACHES = {
 }
 
 AUTH_USER_MODEL = 'users.User'
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'API Pagos',
+    'DESCRIPTION': 'Api de Pagos de Servicios de Streaming',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
