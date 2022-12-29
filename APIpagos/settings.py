@@ -1,3 +1,5 @@
+# import django
+# django.setup()
 """
 Django settings for APIpagos project.
 
@@ -33,6 +35,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'pagos.apps.PagosConfig',
+    # 'versionedPagos.apps.VersionedpagosConfig',
+    # 'versionedUsers.models.VersionedusersConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,6 +46,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework.authtoken',
+    'guardian',
+
 ]
 
 MIDDLEWARE = [
@@ -136,6 +142,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_THROTTLE_RATES': {
         'pagos': '1000/day',
+        'otro': '2000/day',
 
     }
 }

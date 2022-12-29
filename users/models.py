@@ -1,16 +1,17 @@
 from django.db import models
-from django.contrib.auth.base_user import BaseUserManager
-from django.contrib.auth.models import AbstractUser, Group, Permission
+
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import Group, Permission
+
 
 from django.contrib.sessions.backends.db import SessionStore
 
 # Create your models here.
 
-class User(AbstractUser):
+class User(AbstractBaseUser):
     username = models.CharField(max_length=100, unique=True)
     email = models.EmailField(max_length=100)
     password = models.CharField(max_length=100)
-    realname = models.CharField(max_length=100)
     created_at = models.DateField(auto_now_add=True)
 
     is_anonymous = models.BooleanField(default=False)
@@ -33,7 +34,7 @@ class AnonymousUser(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     is_authenticated = models.BooleanField(default=False)
 
-class DifferentUsers(BaseUserManager):
+class DifferentUsers():
     def create_user(self, email, username, password, **extra_fields):
         email = self.normalize_email(email)
         user = self.model(email= email, username=username, **extra_fields)

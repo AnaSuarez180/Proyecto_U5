@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('users', include('users.urls')),
     path('', include('pagos.urls')),
+    path('pagos/', include('versionedPagos.urls')),
 ]

@@ -17,6 +17,8 @@ class UserViewSet(
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
+    throttle_scope = 'otro'
+
     def get(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
     
@@ -32,6 +34,8 @@ class UserViewSetOne(
     queryset = User.objects.all()
     lookup_field = 'username'
 
+    throttle_scope = 'otro'
+
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
     
@@ -40,6 +44,8 @@ class UserViewSetOne(
 
 class SignUpView(generics.GenericAPIView):
     serializer_class = SignUpSerializer
+
+    throttle_scope = 'otro'
 
     def post(self, request: Request):
         data = request.data
@@ -53,6 +59,8 @@ class SignUpView(generics.GenericAPIView):
         return Response(ser.errors, status=400)
 
 class LoginView(APIView):
+
+    throttle_scope = 'otro'
 
     def post(self, request: Request):
         email = request.data.get('email')
@@ -79,3 +87,5 @@ class LoginView(APIView):
 class GetUser(viewsets.ReadOnlyModelViewSet):
     serializer_class = GetUserSerializer
     queryset = User.objects.all()
+
+    throttle_scope = 'otro'
